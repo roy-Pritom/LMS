@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-rating .ant-rate-star {
+    font-size: 14px; /* Adjust star size for all states */
+  }
+  
+  .custom-rating .ant-rate-star-full .anticon-star {
+    color: #faad14; /* Color for fully filled stars */
+  }
+  
+  .custom-rating .ant-rate-star-zero .anticon-star {
+    color: #ffffff; /* Color for unfilled stars */
+  }
+  
+  .custom-rating .ant-rate-star-half .ant-rate-star-second .anticon-star {
+    color: white; /* Color for half-filled stars */
+  }
+  
