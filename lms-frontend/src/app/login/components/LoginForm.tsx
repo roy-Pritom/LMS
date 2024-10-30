@@ -32,7 +32,7 @@ const LoginForm: React.FC = () => {
     console.log("Login Data:", data);
     try {
       const res = await login(data);
-      // console.log(res)
+      console.log(res);
       if (res?.data?.success === true) {
         const token = res?.data?.data?.accessToken;
         if (token) {

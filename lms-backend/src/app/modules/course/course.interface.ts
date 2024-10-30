@@ -1,6 +1,7 @@
 export type TCourse = {
   name: string;
   description?: string;
+  img: string;
   price: number;
   rating: number;
   lectures: number;

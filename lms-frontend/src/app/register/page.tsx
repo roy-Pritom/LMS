@@ -1,7 +1,11 @@
 "use client";
-import { useCreateStudentMutation } from "@/redux/api/auth/authApi";
+import {
+  useCreateStudentMutation,
+  useLoginStudentMutation,
+} from "@/redux/api/auth/authApi";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
+import setAccessToken from "@/services/action/setAccessToken";
 import { decodeToken } from "@/utils/decodeToken";
 import { Button, Form, Input } from "antd";
 import Link from "next/link";
@@ -23,7 +27,7 @@ const RegisterPage: React.FC = () => {
   } = useForm<RegisterFormValues>();
 
   const [createStudent] = useCreateStudentMutation();
-  // const [login, { isLoading }] = useLoginStudentMutation();
+  const [login] = useLoginStudentMutation();
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -31,14 +35,20 @@ const RegisterPage: React.FC = () => {
   const onSubmit = async (data: RegisterFormValues) => {
     const toastId = toast.loading("processing");
     console.log("Login Data:", data);
+    const loginData = {
+      email: data.email,
+      password: data.password,
+    };
     try {
       const res = await createStudent(data);
       // console.log(res)
       if (res?.data?.success === true) {
-        const token = res?.data?.data?.accessToken;
+        const loginRes = await login(loginData);
+        const token = loginRes?.data?.data?.accessToken;
         if (token) {
           const user = decodeToken(token);
           // set token in redux state
+          setAccessToken(token);
           dispatch(setUser({ user, token }));
         }
         toast.success("User register Successfully", {

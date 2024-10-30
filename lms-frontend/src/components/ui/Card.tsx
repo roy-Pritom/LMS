@@ -16,13 +16,19 @@ const Card = ({ content }: TProps) => {
         <Image
           width={300}
           height={300}
-          src="/course2image.jpg"
+          src={content?.img}
           alt=""
-          className="w-full rounded-lg hover:scale-110 transition duration-500"
+          className="w-full h-[200px] rounded-lg hover:scale-110 transition duration-500"
         />
       </div>
       {/* Rating */}
-      <Rate className="custom-rating" disabled allowHalf  defaultValue={content?.rating} count={5} />
+      <Rate
+        className="custom-rating"
+        disabled
+        allowHalf
+        defaultValue={content?.rating}
+        count={5}
+      />
 
       {/* Course Title */}
       <p
